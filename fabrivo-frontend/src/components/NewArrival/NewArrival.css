@@ -1,0 +1,17 @@
+.newarrival-container{
+    background-color: aquamarine;
+    height: 60vh;
+    display:flex;
+    justify-content: center;
+}
+.newarrival-head {
+    padding-top: 50px;
+}
+
+.newarrival-b{
+    width: 100px;
+    height: 30px;
+    background: none;
+    border: solid 1px black;
+    cursor: pointer;
+}

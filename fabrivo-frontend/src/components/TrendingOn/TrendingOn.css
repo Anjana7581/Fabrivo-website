@@ -1,0 +1,19 @@
+.trendingon-container{
+    background-color: aquamarine;
+    height: 60vh;
+    display:flex;
+    justify-content: center;
+}
+.trend-head {
+    padding-top: 50px;
+}
+.trend-head  p {
+padding-top: 10px;
+}
+.trend-b{
+    width: 100px;
+    height: 30px;
+    background: none;
+    border: solid 1px black;
+    cursor: pointer;
+}

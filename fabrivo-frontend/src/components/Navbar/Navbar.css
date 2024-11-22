@@ -19,6 +19,10 @@
     display: flex;
     align-items: center;
 }
+.nav-left a{
+    text-decoration: none;
+    color: inherit;
+} 
 
 .logo {
     color: rgb(19, 87, 19);
@@ -45,13 +49,15 @@
 .nav-right {
     display: flex;
     align-items: center;
-    margin: 0 10px 0 auto;
+    margin: 0 40px 0 auto;
 
     gap: 40px;
 }
 
-h3 {
-    font-size: 18px;
+.nav-right a {
+    font-size: 16px;
+    text-decoration: none;
+    color: inherit;
     cursor: pointer;
 }
 
