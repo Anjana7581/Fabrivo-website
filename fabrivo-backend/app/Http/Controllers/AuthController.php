@@ -12,15 +12,21 @@ class AuthController extends Controller
        $fields = $request -> validate ([
         'name' => 'required|max:225',
         'email' => 'required|email|unique:users',
-        'password' => 'required|confirmed'
-       ]);
-       $user = User::create($fields);
+        'password' => 'required|confirmed',
+        'role' => 'required|in:admin,user', // Validate the role input
 
-       $token =$user -> createToken ($request->name);
+       ]);
+       $user = User::create([
+        'name' => $fields['name'],
+        'email' => $fields['email'],
+        'password' => Hash::make($fields['password']),
+        'role' => $fields['role'],
+    ]);
+    $token = $user->createToken($user->name)->plainTextToken;
        
        return[
         'user' => $user,
-        'token' => $token->plainTextToken
+        'token' => $token,
        ];
     }
     public function login(Request $request)
