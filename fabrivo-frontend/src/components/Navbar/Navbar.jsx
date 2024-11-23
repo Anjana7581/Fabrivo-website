@@ -1,21 +1,30 @@
 import { Link, useNavigate } from "react-router-dom";
 import { FiSearch } from "react-icons/fi";
 import { GrCart } from "react-icons/gr";
-import './Navbar.css'
-
+import { CgProfile } from "react-icons/cg";
+import './Navbar.css';
+import { useEffect, useState } from "react";
+import axiosInstance from "../../axiosInstance";
 
 function Navbar() {
   const navigate = useNavigate();
+  const [user, setUser] = useState(null);
 
-
-  // Function to handle Sign In/Sign Up button click
-  const handleSignin = () => {
-    navigate('/login');
-  };
-
-
-  
-  
+  // Fetch user details if token exists
+  useEffect(() => {
+    const fetchUser = async () => {
+      const token = localStorage.getItem('token');
+      if (token) {
+        try {
+          const response = await axiosInstance.get('/user'); // Assumes you have a '/user' endpoint
+          setUser(response.data); // Update user details
+        } catch (error) {
+          console.error("Failed to fetch user details:", error.response?.data || error.message);
+        }
+      }
+    };
+    fetchUser();
+  }, []);
 
   return (
     <div className="navbar">
@@ -28,10 +37,21 @@ function Navbar() {
         <Link to='/featured-course'>FEATURES</Link>
         <Link to='/contact-us'>CONTACT US</Link>
         <GrCart className='crt' />
-       
-            
-          <button onClick={handleSignin} className='btn-ln'>Signup</button>
-      
+
+        {user ? (
+          <>
+            {user.role === 'admin' && (
+              <Link to='/admin-dashboard'>AdminDashboard</Link>
+            )}
+            <CgProfile
+              className="profile-icon"
+              onClick={() => navigate('/profile')}
+              title="Go to Profile"
+            />
+          </>
+        ) : (
+          <button onClick={() => navigate('/register')} className='btn-ln'>Signup</button>
+        )}
       </div>
     </div>
   );

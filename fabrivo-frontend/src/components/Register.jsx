@@ -1,7 +1,10 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import axiosInstance from '../axiosInstance';
-
+import { useNavigate } from 'react-router-dom';
+import DefaultLayout from './DefaultLayout/DefaultLayout';
 const Register = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -24,6 +27,7 @@ const Register = () => {
       if (response.data.token) {
         localStorage.setItem('token', response.data.token);
         alert('Registration successful!');
+        navigate('/');
       } else {
         alert('Token not received!');
       }
@@ -34,6 +38,7 @@ const Register = () => {
   };
 
   return (
+    <DefaultLayout>
     <form onSubmit={handleSubmit}>
       <input name="name" placeholder="Name" onChange={handleChange} />
       <input name="email" type="email" placeholder="Email" onChange={handleChange} />
@@ -45,6 +50,8 @@ const Register = () => {
       </select>
       <button type="submit">Register</button>
     </form>
+    <p>Already have an account ? <Link to='/login'>Login</Link></p>
+    </DefaultLayout>
   );
 };
 

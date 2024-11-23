@@ -1,9 +1,11 @@
 import { useState } from 'react';
+import { useNavigate , Link } from 'react-router-dom';
 import axiosInstance from '../axiosInstance';
+import DefaultLayout from './DefaultLayout/DefaultLayout';
 
 const Login = () => {
   const [credentials, setCredentials] = useState({ email: '', password: '' });
-
+  const navigate = useNavigate();
   const handleChange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
@@ -15,6 +17,7 @@ const Login = () => {
       if (response.data.token) {
         localStorage.setItem('token', response.data.token);
         alert('Login successful!');
+        navigate('/');
       } else {
         alert('Login failed!');
       }
@@ -25,11 +28,14 @@ const Login = () => {
   };
 
   return (
+    <DefaultLayout>
     <form onSubmit={handleSubmit}>
       <input name="email" type="email" placeholder="Email" onChange={handleChange} />
       <input name="password" type="password" placeholder="Password" onChange={handleChange} />
       <button type="submit">Login</button>
     </form>
+    <p>New? <Link to='/register'>Register</Link></p>
+    </DefaultLayout>
   );
 };
 

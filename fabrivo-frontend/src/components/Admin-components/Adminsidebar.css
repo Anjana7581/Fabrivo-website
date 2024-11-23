@@ -1,0 +1,12 @@
+.adminsidebar-main{
+    height: 85vh;
+    background-color: aqua;
+    color: black;
+    padding: 30px;
+   
+}
+.adminsidebar-main li{
+    list-style: none;
+    margin: 20px;
+    font-size: 23px;
+}

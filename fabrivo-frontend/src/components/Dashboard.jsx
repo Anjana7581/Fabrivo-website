@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import axiosInstance from '../axiosInstance';
-
+import { useNavigate } from 'react-router-dom';
+import { DefaultContext } from 'react-icons/lib';
 const Dashboard = () => {
   const [user, setUser] = useState(null);
-
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -24,6 +25,7 @@ const Dashboard = () => {
       await axiosInstance.post('/logout');
       localStorage.removeItem('token');
       alert('Logged out successfully!');
+      navigate('/');
     } catch (error) {
       console.error(error.response.data);
       alert('Logout failed!');
@@ -31,10 +33,12 @@ const Dashboard = () => {
   };
 
   return (
+    <DefaultContext>
     <div>
       <h1>Welcome, {user?.name}</h1>
       <button onClick={handleLogout}>Logout</button>
     </div>
+    </DefaultContext>
   );
 };
 
