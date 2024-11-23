@@ -32,7 +32,7 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $request -> validate ([
-            'email' => 'required|email|exists:users',
+            'email' => 'required|email|exists:users,email',
             'password' => 'required'
            ]); 
 
@@ -40,9 +40,9 @@ class AuthController extends Controller
            $user = User::where ('email',$request->email)->first();
 
            if(! $user || ! Hash :: check ($request->password,$user -> password)){
-            return[
-                'message'=>'the provided credentials are incorrect'
-            ];
+            return response()->json([
+                'message' => 'The provided credentials are incorrect.',
+            ], 401);
            }
 
 
@@ -56,10 +56,18 @@ class AuthController extends Controller
     }
     public function logout(Request $request)
     {
-        $request->user()->tokens()->delete();
-
-        return[
-            'message'=>'you are logged out'
-        ];
+        try {
+            // Log user details
+            \Log::info('Logout initiated by user: ' . $request->user()->id);
+    
+            $request->user()->currentAccessToken()->delete();
+            return response()->json(['message' => 'Logged out successfully'], 200);
+        } catch (\Exception $e) {
+            \Log::error('Logout failed: ' . $e->getMessage());
+            return response()->json(['message' => 'Logout failed', 'error' => $e->getMessage()], 500);
+        }
     }
+    
+    
+    
 }
