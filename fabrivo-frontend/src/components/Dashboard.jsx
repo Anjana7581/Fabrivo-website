@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import axiosInstance from '../axiosInstance';
 import { useNavigate } from 'react-router-dom';
-import { DefaultContext } from 'react-icons/lib';
 const Dashboard = () => {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
@@ -33,12 +32,12 @@ const Dashboard = () => {
   };
 
   return (
-    <DefaultContext>
+    <>
     <div>
       <h1>Welcome, {user?.name}</h1>
       <button onClick={handleLogout}>Logout</button>
     </div>
-    </DefaultContext>
+    </>
   );
 };
 

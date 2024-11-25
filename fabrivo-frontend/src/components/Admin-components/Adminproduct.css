@@ -1,0 +1,76 @@
+/* General Styles */
+.admin-product-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+}
+
+.admin-product-container h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Table Styles */
+.admin-product-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+
+.admin-product-table thead {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.admin-product-table th, .admin-product-table td {
+    text-align: left;
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+.admin-product-table th {
+    font-weight: bold;
+}
+
+.admin-product-table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Image Styling */
+.admin-product-image {
+    width: 50px;
+    height: auto;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+/* Action Buttons */
+.admin-product-actions button {
+    margin: 0 5px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.admin-product-actions .edit-button {
+    background-color: #ffc107;
+    color: #fff;
+}
+
+.admin-product-actions .edit-button:hover {
+    background-color: #e0a800;
+}
+
+.admin-product-actions .delete-button {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.admin-product-actions .delete-button:hover {
+    background-color: #c82333;
+}

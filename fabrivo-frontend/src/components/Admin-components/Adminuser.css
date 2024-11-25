@@ -1,37 +1,65 @@
-/* Form styles */
-.create-user-form {
-    margin-bottom: 20px;
+/* General Styles */
+.admin-user-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    min-height: 100vh;
+}
+
+.admin-user-title {
     text-align: center;
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
 }
 
-.create-user-form input {
-    margin: 5px;
-    padding: 10px;
-    width: 200px;
+/* Table Styles */
+.admin-user-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto;
+    background-color: #fff;
     border: 1px solid #ddd;
-    border-radius: 4px;
+    border-radius: 5px;
+    overflow: hidden;
 }
 
-.create-user-form .btn-create {
-    padding: 10px 15px;
-    background-color: #4caf50;
+.admin-user-thead {
+    background-color: #007bff;
     color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
 }
 
-.create-user-form .btn-create:hover {
-    background-color: #45a049;
+.admin-user-th,
+.admin-user-td {
+    text-align: left;
+    padding: 10px;
+    border: 1px solid #ddd;
 }
 
-/* Button styles */
+.admin-user-th {
+    font-weight: bold;
+}
+
+.admin-user-tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Input Fields */
+.admin-user-row input {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    width: 100%;
+}
+
+/* Buttons */
 .btn {
-    margin: 5px;
-    padding: 8px 12px;
+    padding: 5px 10px;
     border: none;
-    border-radius: 4px;
+    border-radius: 3px;
+    font-size: 14px;
     cursor: pointer;
+    margin-right: 5px;
 }
 
 .btn-edit {
@@ -43,6 +71,15 @@
     background-color: #e0a800;
 }
 
+.btn-save {
+    background-color: #28a745;
+    color: white;
+}
+
+.btn-save:hover {
+    background-color: #218838;
+}
+
 .btn-delete {
     background-color: #dc3545;
     color: white;
@@ -52,11 +89,19 @@
     background-color: #c82333;
 }
 
-.btn-save {
-    background-color: #007bff;
-    color: white;
-}
+/* Responsive Design */
+@media (max-width: 768px) {
+    .admin-user-table {
+        font-size: 14px;
+    }
 
-.btn-save:hover {
-    background-color: #0056b3;
+    .admin-user-th,
+    .admin-user-td {
+        padding: 8px;
+    }
+
+    .btn {
+        padding: 4px 8px;
+        font-size: 12px;
+    }
 }

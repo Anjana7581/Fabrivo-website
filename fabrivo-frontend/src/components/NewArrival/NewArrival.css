@@ -1,17 +1,41 @@
-.newarrival-container{
+.newarrival-container {
     background-color: aquamarine;
-    height: 60vh;
-    display:flex;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
-}
-.newarrival-head {
-    padding-top: 50px;
+    align-items: center;
 }
 
-.newarrival-b{
+.newarrival-head {
+    padding-top: 20px;
+    text-align: center;
+}
+
+.newarrival-head h1 {
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+.product-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-top: 20px;
+    width: 100%;
+    justify-items: center;
+}
+
+.see-all-button-container {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.newarrival-b {
     width: 100px;
     height: 30px;
     background: none;
     border: solid 1px black;
     cursor: pointer;
+    font-size: 14px;
 }

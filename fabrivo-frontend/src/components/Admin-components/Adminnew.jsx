@@ -1,5 +1,11 @@
+
 function Adminnew() {
-    return( <div>Admin New Component</div>);
-}
+    
+
+    return (
+       <div className="jdj">
+        jiiii
+       </div>
+    );}
 
 export default Adminnew;
