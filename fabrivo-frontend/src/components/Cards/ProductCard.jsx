@@ -1,7 +1,11 @@
 import React from "react";
 import "./ProductCard.css";
+import { IoMdHeartEmpty } from "react-icons/io";
+import { useCart } from '../../context/cartcontext';
 
 function ProductCard({ product }) {
+    const { addToCart } = useCart();
+
     return (
         <div className="product-card">
             <div className="product-card-image">
@@ -16,9 +20,12 @@ function ProductCard({ product }) {
                 <p className="product-card-price">
                     Price: ${product.price}
                 </p>
-                <p className="product-card-offer">
+                {/* <p className="product-card-offer">
                     Offer Price: {product.offer_price ? `$${product.offer_price}` : "No Offer"}
-                </p>
+                </p> */}
+                <button className="wishlist"><IoMdHeartEmpty /></button>
+                <button onClick={() => addToCart(product)}>Add to Cart</button>
+
             </div>
         </div>
     );

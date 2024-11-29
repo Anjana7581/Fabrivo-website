@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Models\Product;
 
 
 Route::get('/user', function (Request $request) {
@@ -23,3 +24,11 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::put('/users/{id}', [UserController::class, 'update']); // Update a user
     Route::delete('/users/{id}', [UserController::class, 'destroy']); // Delete a user
 });
+
+
+
+
+
+
+Route::get('/sections/{section}', [ProductController::class, 'getSectionProducts']);
+Route::get('/sections/trending', [ProductController::class, 'getTrendingProducts']);

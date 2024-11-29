@@ -19,7 +19,11 @@ class Product extends Model
         'type',
         'description',
         'rating',
+        'is_new',
+        'is_offer',
+        'monthly_views',
     ];
+    
 
 
 }

@@ -21,6 +21,9 @@ return new class extends Migration
             $table->string('type'); // Type of fabric (e.g., Silk, Cotton)
             $table->text('description'); // Fabric description
             $table->decimal('rating', 3, 2)->default(0); // Rating, default 0
+            $table->boolean('is_new')->default(false);
+            $table->boolean('is_offer')->default(false);
+            $table->integer('monthly_views')->default(0);
             $table->timestamps(); // Created and updated timestamps
         });
     }

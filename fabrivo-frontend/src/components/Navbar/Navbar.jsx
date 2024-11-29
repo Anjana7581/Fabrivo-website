@@ -36,7 +36,7 @@ function Navbar() {
       <div className="nav-right">
         <Link to='/featured-course'>FEATURES</Link>
         <Link to='/contact-us'>CONTACT US</Link>
-        <GrCart className='crt' />
+        <Link to='/cart'><GrCart className='crt' /></Link>
 
         {user ? (
           <>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -49,6 +50,9 @@ class ProductController extends Controller
         'type' => $request->type,
         'description' => $request->description,
         'rating' => $request->rating ?? 0,
+        'is_new' => true,  // Mark as 'new arrival' by default
+        'is_offer' => $request->input('is_offer', false), // Optional: Mark as 'on offer'
+   
     ]);
 
     return redirect()->route('products.index')->with('success', 'Product created successfully!');
@@ -60,10 +64,12 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        // Fetch a single product by ID
+        // Increment the monthly views each time the product is viewed
+        $product->increment('monthly_views');  // Increment the monthly_views column
+        $product->save();  // Save the updated value
+
         return response()->json($product, 200);
     }
-
     /**
      * Update the specified resource in storage.
      */
@@ -98,4 +104,42 @@ class ProductController extends Controller
 
         return response()->json(['message' => 'Product deleted successfully'], 200);
     }
+
+
+
+
+
+
+
+
+
+
+    public function getSectionProducts($section)
+    {
+        $query = Product::query();
+
+        if ($section === 'new-arrival') {
+            $query->where('is_new', true);
+        } elseif ($section === 'offer-zone') {
+            $query->where('is_offer', true);
+        } elseif ($section === 'trending') {
+            return $this->getTrendingProducts();  // Use the trending method here
+        }
+
+        return response()->json($query->get());
+    }
+
+    // Method to handle trending products specifically
+    public function getTrendingProducts()
+    {
+        // Fetch the top 10 products with more than 0 monthly views
+        $products = Product::where('monthly_views', '>', 0)  
+            ->orderBy('monthly_views', 'desc')  
+            ->limit(10)  
+            ->get();
+
+        return response()->json($products);
+    }
+
+
 }

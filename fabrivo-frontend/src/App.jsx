@@ -11,11 +11,14 @@ import Adminuser from './components/Admin-components/Adminuser.jsx';
 import Adminnew from './components/Admin-components/Adminnew.jsx';
 import Adminpayment from './components/Admin-components/Adminpayment.jsx';
 import Adminprofile from './components/Admin-components/Adminprofile.jsx';
+import { CartProvider } from './context/cartcontext.jsx';
 
 import AdminDashboard from './pages/Admin/AdminDashboard.jsx';
+import Cart from './components/Cart/Cart.jsx';
 
 function App() {
   return (
+    < CartProvider >
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
@@ -24,6 +27,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="*" element={<Pagenotfound />} />
+        <Route path="/cart" element={<Cart/>} />
 
         {/* Parent route for AdminDashboard */}
         <Route path="/admin-dashboard" element={<AdminDashboard />}>
@@ -36,6 +40,7 @@ function App() {
         </Route>
       </Routes>
     </Router>
+    </CartProvider>
   );
 }
 

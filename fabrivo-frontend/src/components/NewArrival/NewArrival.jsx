@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
 import axiosInstance from "../../axiosInstance"; // Make sure to replace with your correct axiosInstance import
 import ProductCard from "../Cards/ProductCard"; // Import the ProductCard component
+import { useNavigate } from "react-router-dom"
 import './NewArrival.css';
+
 
 function NewArrival() {
     const [products, setProducts] = useState([]);
-
+   const navigate =useNavigate();
     // Fetch the products from the API
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await axiosInstance.get("/products");
+                const response = await axiosInstance.get("/sections/new-arrival");
                 setProducts(response.data); // Store the products in the state
             } catch (error) {
                 console.error("Error fetching products:", error);
@@ -34,7 +36,7 @@ function NewArrival() {
 
             {/* See All button below the product cards */}
             <div className="see-all-button-container">
-                <button className='newarrival-b'>See All</button>
+                <button onClick={() => navigate('/allproducts')}   className='newarrival-b'>See All</button>
             </div>
         </div>
     );

@@ -1,19 +1,79 @@
-.trendingon-container{
-    background-color: aquamarine;
-    height: 60vh;
-    display:flex;
-    justify-content: center;
+/* TrendingOn.css */
+
+/* Container for the entire Trending section */
+.trendingon-container {
+    padding: 20px;
+    background-color: #f4f4f4; /* Light background for the section */
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
+
+/* Header for the trending section */
 .trend-head {
-    padding-top: 50px;
+    text-align: center;
+    margin-bottom: 30px;
 }
-.trend-head  p {
-padding-top: 10px;
+
+/* Title of the section */
+.trend-title {
+    font-size: 36px;
+    font-weight: bold;
+    color: #333; /* Dark text color */
+    margin-bottom: 10px;
 }
-.trend-b{
-    width: 100px;
-    height: 30px;
-    background: none;
-    border: solid 1px black;
+
+/* Description text under the title */
+.trend-description {
+    font-size: 16px;
+    color: #666; /* Lighter text color */
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Grid container for product cards */
+.product-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Responsive grid */
+    gap: 20px;
+    justify-items: center;
+    margin-bottom: 20px;
+}
+
+/* Button to view all trending products */
+.trend-button {
+    display: inline-block;
+    background-color: #007bff; /* Blue background */
+    color: white;
+    padding: 12px 25px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Button hover effect */
+.trend-button:hover {
+    background-color: #0056b3; /* Darker blue */
+}
+
+/* Responsive styles for smaller screens */
+@media (max-width: 768px) {
+    .trend-title {
+        font-size: 28px;
+    }
+
+    .trend-description {
+        font-size: 14px;
+    }
+
+    .product-cards-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Adjust grid on smaller screens */
+    }
+
+    .trend-button {
+        padding: 10px 20px; /* Smaller padding for the button */
+        font-size: 14px;
+    }
 }
