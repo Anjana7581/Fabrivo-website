@@ -99,6 +99,12 @@
 .cart-checkout-button:hover {
     background-color: #45a049;
 }
+.auth-message {
+    color: red;
+    margin-top: 10px;
+    /* font-size: 0.9rem; */
+}
+
 
 @media (max-width: 768px) {
     .cart-container {

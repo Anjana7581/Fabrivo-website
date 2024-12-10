@@ -1,5 +1,5 @@
 // CartContext.js
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState, useContext, useEffect } from 'react';
 
 const CartContext = createContext();
 
@@ -9,6 +9,26 @@ export const useCart = () => {
 
 export const CartProvider = ({ children }) => {
     const [cart, setCart] = useState([]);
+
+  // Load cart data from localStorage on mount
+  useEffect(() => {
+    const storedCart = JSON.parse(localStorage.getItem('cart'));
+    if (storedCart) {
+        setCart(storedCart);
+    }
+}, []);
+
+// Save cart data to localStorage whenever it changes
+useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(cart));
+}, [cart]);
+
+
+
+
+
+
+
 
     const addToCart = (product) => {
         setCart(prevCart => {

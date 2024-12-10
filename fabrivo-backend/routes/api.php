@@ -6,6 +6,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Models\Product;
+use App\Http\Controllers\OrderController;
 
 
 Route::get('/user', function (Request $request) {
@@ -26,9 +27,12 @@ Route::middleware(['auth:sanctum'])->group(function () {
 });
 
 
-
-
-
-
 Route::get('/sections/{section}', [ProductController::class, 'getSectionProducts']);
 Route::get('/sections/trending', [ProductController::class, 'getTrendingProducts']);
+
+
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::post('/orders', [OrderController::class, 'store'])->name('store');
+    Route::get('/orders/{id}', [OrderController::class, 'show'])->name('show');
+    Route::post('/orders/pay', [OrderController::class, 'pay'])->name('pay');
+});

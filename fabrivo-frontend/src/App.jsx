@@ -15,6 +15,8 @@ import { CartProvider } from './context/cartcontext.jsx';
 
 import AdminDashboard from './pages/Admin/AdminDashboard.jsx';
 import Cart from './components/Cart/Cart.jsx';
+import Checkout from './components/checkout.jsx';
+import OrderConfirmation from './components/orderconfirmation.jsx';
 
 function App() {
   return (
@@ -28,6 +30,8 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="*" element={<Pagenotfound />} />
         <Route path="/cart" element={<Cart/>} />
+        <Route path="/checkout" element={<Checkout/>} />
+        <Route path="/order-confirmation" element={<OrderConfirmation/>} />
 
         {/* Parent route for AdminDashboard */}
         <Route path="/admin-dashboard" element={<AdminDashboard />}>

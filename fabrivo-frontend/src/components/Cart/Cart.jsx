@@ -1,10 +1,26 @@
-// Cart.js
-import React from 'react';
+import {useState } from 'react';
+import { useNavigate,Link} from 'react-router-dom';
 import { useCart } from '../../context/cartcontext';
 import DefaultLayout from '../DefaultLayout/DefaultLayout';
-import './Cart.css'
+import './Cart.css';
+
 const Cart = () => {
     const { cart, removeFromCart, updateQuantity, getCartTotal } = useCart();
+    const [authMessage, setAuthMessage] = useState('');
+    const navigate = useNavigate();
+
+    const handleCheckout = () => {
+        const isAuthenticated = localStorage.getItem('token'); // Check if token exists
+        if (!isAuthenticated) {
+            setAuthMessage('Please log in to proceed to checkout.');
+            // navigate('/login'); // Redirect to login page
+        }
+        else if (cart.length > 0) {
+            navigate('/checkout', { state: { cart } });
+        } else  {
+            setAuthMessage('Your cart is empty!');
+        }
+    };
 
     return (
         <DefaultLayout>
@@ -47,9 +63,12 @@ const Cart = () => {
                         </ul>
                         <div className="cart-summary">
                             <h4 className="cart-total">Total: ${getCartTotal()}</h4>
-                            <button className="cart-checkout-button" onClick={() => alert('Proceed to Checkout')}>
+                            <button className="cart-checkout-button" onClick={handleCheckout}>
                                 Checkout
                             </button>
+                            {authMessage && <p className="auth-message">{authMessage}<Link to='/login'>login</Link>
+                            </p>}
+
                         </div>
                     </div>
                 )}
