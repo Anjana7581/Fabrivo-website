@@ -1,124 +1,151 @@
-*{
-    margin: 0;
-    padding: 0;
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-
-
 .navbar {
-    /* width: 100%; */
-    height: 60px;
-    background-color: rgb(203, 247, 234);
-    display: flex;
-    align-items: center;
-    padding: 0 30px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  height: 60px;
+  background-color: rgb(203, 247, 234);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  position: relative;
 }
 
 .nav-left {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
-.nav-left a{
-    text-decoration: none;
-    color: inherit;
-} 
+
+.nav-left a {
+  text-decoration: none;
+  color: inherit;
+}
 
 .logo {
-    color: rgb(19, 87, 19);
-    margin-right: 30px;
-    font-size: 24px;
+  color: rgb(19, 87, 19);
+  font-size: 24px;
+}
+
+.search-container {
+  position: relative;
+  margin-left: 20px;
 }
 
 .search {
-    width: 320px;
-    height: 38px;
-    border-radius: 18px;
-    border: 1px solid rgb(45, 143, 96);
-    padding-left: 10px;
-    font-size: 16px;
+  width: 320px;
+  height: 38px;
+  border-radius: 18px;
+  border: 1px solid rgb(45, 143, 96);
+  padding-left: 10px;
+  font-size: 16px;
 }
 
 .search-icon {
-    font-size: 24px;
-    color: rgb(45, 143, 96);
-    cursor: pointer;
-    margin-left: 10px;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 24px;
+  color: rgb(45, 143, 96);
+  cursor: pointer;
 }
 
 .nav-right {
-    display: flex;
-    align-items: center;
-    margin: 0 40px 0 auto;
-
-    gap: 40px;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  transition: max-height 0.3s ease-in-out;
 }
 
 .nav-right a {
-    font-size: 16px;
-    text-decoration: none;
-    color: inherit;
-    cursor: pointer;
+  font-size: 16px;
+  text-decoration: none;
+  color: inherit;
 }
 
 .crt {
-    font-size: 22px;
-    cursor: pointer;
+  font-size: 22px;
+  cursor: pointer;
 }
 
 .btn-ln {
-    width: 70px;
-    height: 30px;
-    font-size: 16px;
-    background-color: rgb(19, 87, 19);
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+  width: 70px;
+  height: 30px;
+  font-size: 16px;
+  background-color: rgb(19, 87, 19);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .btn-ln:hover {
-    background-color: rgb(45, 143, 96);
+  background-color: rgb(45, 143, 96);
 }
 
+.profile-icon {
+  font-size: 24px;
+  cursor: pointer;
+}
 
-/* Navbar.css */
-.navbar .nav-right {
-    position: relative;
+/* Responsive Styles */
+.menu-icon {
+  display: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: rgb(19, 87, 19);
+}
+
+@media (max-width: 768px) {
+  .search-container {
+      display: none;
   }
-  
-  .profile-dropdown {
-    position: relative;
-    display: inline-block;
+
+  .menu-icon {
+      display: block;
   }
-  
+
+  .nav-right {
+      flex-direction: column;
+      align-items: flex-start;
+      position: absolute;
+      top: 60px;
+      right: 0;
+      background-color: rgb(203, 247, 234);
+      width: 100%;
+      max-height: 0;
+      overflow: hidden;
+  }
+
+  .nav-right.open {
+      max-height: 300px;
+      padding: 10px 20px;
+  }
+
+  .nav-right a {
+      padding: 10px 0;
+      font-size: 14px;
+  }
+
+  .btn-ln {
+      font-size: 14px;
+      width: 100%;
+      text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo {
+      font-size: 20px;
+  }
+
+  .crt,
   .profile-icon {
-    cursor: pointer;
-    font-size: 24px;
+      font-size: 20px;
   }
-  
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    right: 0;
-    background-color: #fff;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-  }
-  
-  .profile-dropdown:hover .dropdown-content {
-    display: block;
-  }
-  
-  .dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-  }
-  
-  .dropdown-content a:hover {
-    background-color: #ddd;
-  }
-  
+}
