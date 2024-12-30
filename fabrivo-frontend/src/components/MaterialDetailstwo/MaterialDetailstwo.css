@@ -1,25 +1,107 @@
-.materialdetailstwo-main{
-    height: 60vh;
+/* Main Container */
+.materialdetailstwo-main {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    padding-top: 20px;
-    gap: 20px;
+    padding: 40px;
+    background-color: #F5F5F5;
+}
 
-}
-.materialdetailstwo-main h1{
-    font-size: 3rem;
-}
-.materialtwo-container{
+/* Material Container */
+.materialtwo-container {
     display: flex;
     flex-direction: row;
-    gap: 30px;
+    align-items: center;
+    gap: 20px;
+    border: 2px solid #5BAE8A;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #D3E8DB;
+    max-width: 800px;
+    width: 100%;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
 
+/* Left Section */
+.materialtwo-left {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-.materialtwo-left{
-    background-color: blueviolet;
-   
+
+.materialtwo-left img {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
-.materialtwo-right{
-    background-color: aqua;
+
+/* Right Section */
+.materialtwo-right {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.materialtwo-right h2 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #114B36;
+    margin: 0;
+}
+
+.materialtwo-right p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #114B36;
+    margin: 0;
+}
+
+/* Responsive Design */
+
+/* For tablets and smaller devices */
+@media (max-width: 768px) {
+    .materialtwo-container {
+        flex-direction: column;
+        padding: 20px;
+        gap: 15px;
+    }
+
+    .materialtwo-left img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .materialtwo-right h2 {
+        font-size: 1.5rem;
+        text-align: center;
+    }
+
+    .materialtwo-right p {
+        text-align: center;
+    }
+}
+
+/* For mobile phones */
+@media (max-width: 480px) {
+    .materialtwo-container {
+        padding: 15px;
+        gap: 10px;
+    }
+
+    .materialtwo-right h2 {
+        font-size: 1.3rem;
+    }
+
+    .materialtwo-right p {
+        font-size: 0.9rem;
+    }
+
+    .materialtwo-left img {
+        max-width: 100%;
+        height: auto;
+    }
 }
