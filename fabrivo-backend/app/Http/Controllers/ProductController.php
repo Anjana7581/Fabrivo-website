@@ -13,51 +13,52 @@ class ProductController extends Controller
      */
     public function index()
     {
-        // Fetch all products
-        return response()->json(Product::all(), 200);
+        $products = Product::all()->map(function ($product) {
+            if ($product->image) {
+                $product->image_url = asset('storage/' . $product->image); // Add full URL only if image exists
+            }
+            return $product;
+        });
+    
+        return response()->json($products, 200);
     }
+    
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-{
-    // Validate incoming request
-    $request->validate([
-        'title' => 'required|max:225',
-        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        'price' => 'required|numeric',
-        'offer_price' => 'nullable|numeric',
-        'color' => 'required|string',
-        'type' => 'required|string',
-        'description' => 'required|string',
-        'rating' => 'nullable|numeric|min:0|max:5',
-    ]);
-
-    // Handle file upload for image
-    $imagePath = null;
-    if ($request->hasFile('image')) {
+    {
+        $request->validate([
+            'title' => 'required|max:225',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'price' => 'required|numeric',
+            'offer_price' => 'nullable|numeric',
+            'color' => 'required|string',
+            'type' => 'required|string',
+            'description' => 'required|string',
+            'rating' => 'nullable|numeric|min:0|max:5',
+           
+        ]);
+        
+    
         $imagePath = $request->file('image')->store('products', 'public');
+    
+        $product = Product::create([
+            'title' => $request->title,
+            'image' => $imagePath,
+            'price' => $request->price,
+            'offer_price' => $request->offer_price,
+            'color' => $request->color,
+            'type' => $request->type,
+            'description' => $request->description,
+            'rating' => $request->rating ?? 0,
+
+        ]);
+    
+        return redirect()->route('products.index')->with('success', 'Product created successfully!');
     }
-
-    // Create the new product
-    $product = Product::create([
-        'title' => $request->title,
-        'image' => $imagePath,
-        'price' => $request->price,
-        'offer_price' => $request->offer_price,
-        'color' => $request->color,
-        'type' => $request->type,
-        'description' => $request->description,
-        'rating' => $request->rating ?? 0,
-        'is_new' => true,  // Mark as 'new arrival' by default
-        'is_offer' => $request->input('is_offer', false), // Optional: Mark as 'on offer'
-   
-    ]);
-
-    return redirect()->route('products.index')->with('success', 'Product created successfully!');
-}
-
+    
 
     /**
      * Display the specified resource.
@@ -73,27 +74,32 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, $id)
     {
-        $fields = $request->validate([
-            'title' => 'required|max:225',
-            'image' => 'nullable|image|max:2048',
-            'price' => 'required|numeric|min:0',
-            'offer_price' => 'nullable|numeric|min:0',
-            'color' => 'required|string|max:50',
-            'type' => 'required|string|max:100',
+        // Dump and die to inspect the request data
+        dd($request->all());
+    
+        // Validation logic (if needed)
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'price' => 'required|numeric',
+            'color' => 'required|string',
+            'type' => 'required|string',
             'description' => 'required|string',
-            'rating' => 'nullable|numeric|min:0|max:5',
+            'offer_price' => 'nullable|numeric',
+            'rating' => 'nullable|numeric',
+            'monthly_views' => 'nullable|integer',
         ]);
-
-        if ($request->hasFile('image')) {
-            $fields['image'] = $request->file('image')->store('product_images', 'public');
-        }
-
-        $product->update($fields);
-
-        return response()->json($product, 200);
+    
+        // Update logic (if validation passes)
+        $product = Product::findOrFail($id);
+        $product->update($request->all());
+    
+        return response()->json($product);
     }
+    
+
+    
 
     /**
      * Remove the specified resource from storage.
