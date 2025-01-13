@@ -76,9 +76,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // Dump and die to inspect the request data
-        dd($request->all());
-    
+       
         // Validation logic (if needed)
         $request->validate([
             'title' => 'required|string|max:255',

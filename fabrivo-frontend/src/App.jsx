@@ -17,6 +17,7 @@ import AdminDashboard from './pages/Admin/AdminDashboard.jsx';
 import Cart from './components/Cart/Cart.jsx';
 import Checkout from './components/checkout.jsx';
 import OrderConfirmation from './components/orderconfirmation.jsx';
+import EditProduct from './components/Admin-components/EditProduct.jsx';
 
 function App() {
   return (
@@ -41,6 +42,8 @@ function App() {
           <Route path="admin-new" element={<Adminnew />} />
           <Route path="admin-payment" element={<Adminpayment />} />
           <Route path="admin-profile" element={<Adminprofile />} />
+          <Route path="admin-product/edit/:id" element={<EditProduct />} />
+
         </Route>
       </Routes>
     </Router>

@@ -1,0 +1,86 @@
+/* General styling */
+.edit-product-page-container {
+    width: 60%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.edit-product-page-container h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Error message styling */
+.edit-product-page-error {
+    color: red;
+    font-size: 1rem;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Form styling */
+.edit-product-page-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.edit-product-page-form label {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.edit-product-page-form input,
+.edit-product-page-form textarea {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.edit-product-page-form input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+.edit-product-page-form input[type="number"]::-webkit-outer-spin-button,
+.edit-product-page-form input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Rating input styling */
+.edit-product-page-form input[type="number"] {
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
+}
+
+/* Textarea specific styling */
+.edit-product-page-form textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Submit button styling */
+.edit-product-page-button {
+    padding: 12px;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.edit-product-page-button:hover {
+    background-color: #45a049;
+}
+
+.edit-product-page-button:disabled {
+    background-color: #ddd;
+    cursor: not-allowed;
+}
