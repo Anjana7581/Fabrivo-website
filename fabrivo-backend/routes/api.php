@@ -43,8 +43,4 @@ Route::get('/sections/trending', [ProductController::class, 'getTrendingProducts
 
 
 
-Route::middleware(['auth:sanctum'])->group(function () {
-    Route::post('/orders', [OrderController::class, 'store'])->name('store');
-    Route::get('/orders/{id}', [OrderController::class, 'show'])->name('show');
-    Route::post('/orders/pay', [OrderController::class, 'pay'])->name('pay');
-});
+Route::post('/orders', [OrderController::class, 'placeOrder']);

@@ -17,9 +17,9 @@ function Home() {
       <DefaultLayout>
       <Easylist/>
       <Banner/>
-      <TrendingOn/>
+      {/* <TrendingOn/> */}
       <MaterialDetails/>
-      <NewArrival/>
+      {/* <NewArrival/> */}
       <MaterialDetailstwo/>
       </DefaultLayout>   
      </div>

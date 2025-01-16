@@ -6,23 +6,17 @@ const OrderConfirmation = () => {
     const { order } = state || {};
 
     if (!order) {
-        return <p>No order information found.</p>;
+        return <p>No order details available.</p>;
     }
 
     return (
-        <div className="order-confirmation-container">
-            <h2>Thank you for your order!</h2>
+        <div>
+            <h2>Order Confirmation</h2>
             <p>Order ID: {order.id}</p>
             <p>Status: {order.status}</p>
             <p>Total Price: ${order.total_price}</p>
-            <h3>Items:</h3>
-            <ul>
-                {order.items.map((item) => (
-                    <li key={item.id}>
-                        {item.product_id} - Quantity: {item.quantity} - Price: ${item.price}
-                    </li>
-                ))}
-            </ul>
+            <p>Payment Method: {order.payment_method}</p>
+            <p>Shipping Address: {order.shipping_address}</p>
         </div>
     );
 };

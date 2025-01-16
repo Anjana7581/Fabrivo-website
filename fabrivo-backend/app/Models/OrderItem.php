@@ -2,34 +2,34 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class OrderItem extends Model
 {
-    // Make sure you add 'product_id' to the fillable array
+    use HasFactory;
+
+    // Allow mass assignment for these fields
     protected $fillable = [
         'order_id',
-        'product_id', // Add this line
+        'product_id',
         'quantity',
         'price',
     ];
 
-    // Other model code
-
-
+    /**
+     * Define the relationship with the `Order` model.
+     */
     public function order()
     {
         return $this->belongsTo(Order::class);
     }
-    
-    public function fabric()
-    {
-        return $this->belongsTo(Fabric::class);
-    }
-    
+
+    /**
+     * Define the relationship with the `Product` model.
+     */
     public function product()
     {
-        return $this->belongsTo(Product::class); // Optional if you sell other products
+        return $this->belongsTo(Product::class);
     }
-    
 }

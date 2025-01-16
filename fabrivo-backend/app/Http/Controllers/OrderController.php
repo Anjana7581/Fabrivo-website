@@ -1,37 +1,37 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Order;
 use App\Models\OrderItem;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
-    public function store(Request $request)
+    public function placeOrder(Request $request)
     {
-        // Validate the request data
         $validated = $request->validate([
-            'user_id' => 'required|integer',
-            'status' => 'required|string',
-            'total_price' => 'required|numeric',
-            'payment_method' => 'required|string',
+            'user_id' => 'required|exists:users,id',
             'shipping_address' => 'required|string',
+            'payment_method' => 'required|string|in:COD,stripe,paypal',
             'items' => 'required|array',
-            'items.*.product_id' => 'required|integer|exists:products,id',
+            'items.*.product_id' => 'required|exists:products,id',
             'items.*.quantity' => 'required|integer|min:1',
-            'items.*.price' => 'required|numeric',
+            'items.*.price' => 'required|numeric|min:0',
         ]);
 
         // Create the order
         $order = Order::create([
             'user_id' => $validated['user_id'],
-            'status' => $validated['status'],
-            'total_price' => $validated['total_price'],
-            'payment_method' => $validated['payment_method'],
+            'status' => 'pending',
+            'total_price' => collect($validated['items'])->reduce(function ($carry, $item) {
+                return $carry + ($item['price'] * $item['quantity']);
+            }, 0),
             'shipping_address' => $validated['shipping_address'],
+            'payment_method' => $validated['payment_method'],
         ]);
 
-        // Loop through items and create associated OrderItem records
+        // Create order items
         foreach ($validated['items'] as $item) {
             OrderItem::create([
                 'order_id' => $order->id,
@@ -41,13 +41,6 @@ class OrderController extends Controller
             ]);
         }
 
-        // Eager load the associated items
-        $order->load('items');
-
-        // Return the response with the order and its items
-        return response()->json([
-            'message' => 'Order created successfully.',
-            'order' => $order,
-        ], 201);
+        return response()->json(['message' => 'Order placed successfully!', 'order' => $order]);
     }
 }

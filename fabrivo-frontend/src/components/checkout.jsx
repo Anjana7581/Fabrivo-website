@@ -6,7 +6,7 @@ const Checkout = () => {
     const { state } = useLocation();
     const { cart } = state || { cart: [] };
     const [shippingAddress, setShippingAddress] = useState('');
-    const [paymentMethod, setPaymentMethod] = useState('stripe');
+    const [paymentMethod, setPaymentMethod] = useState('COD'); // Default to COD
     const navigate = useNavigate();
 
     const handleCheckout = async (event) => {
@@ -17,13 +17,9 @@ const Checkout = () => {
             return;
         }
 
-        // Calculate total price
-        const totalPrice = cart.reduce((total, item) => total + item.price * item.quantity, 0);
-
+        // Prepare order data
         const orderData = {
-            user_id: 1, // Replace with the actual user ID (e.g., from authentication context)
-            status: 'pending', // Default status for a new order
-            total_price: totalPrice,
+            user_id: 1, // Replace with actual user ID from authentication
             shipping_address: shippingAddress,
             payment_method: paymentMethod,
             items: cart.map((item) => ({
@@ -62,6 +58,7 @@ const Checkout = () => {
                         value={paymentMethod}
                         onChange={(e) => setPaymentMethod(e.target.value)}
                     >
+                        <option value="COD">Cash on Delivery</option>
                         <option value="stripe">Stripe</option>
                         <option value="paypal">PayPal</option>
                     </select>

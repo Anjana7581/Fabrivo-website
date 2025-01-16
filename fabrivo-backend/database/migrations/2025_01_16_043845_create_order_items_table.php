@@ -9,17 +9,21 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('order_items', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('order_id')->constrained()->onDelete('cascade'); // Link to orders
-            $table->foreignId('product_id')->constrained()->onDelete('cascade'); // Link to products
+            $table->unsignedBigInteger('order_id');
+            $table->unsignedBigInteger('product_id');
             $table->integer('quantity');
-            $table->decimal('price', 8, 2); // Price of this item
+            $table->decimal('price', 10, 2); // Price per unit
             $table->timestamps();
+    
+            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         });
     }
+    
 
     /**
      * Reverse the migrations.
