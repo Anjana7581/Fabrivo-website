@@ -10,6 +10,9 @@ function Adminsidebar() {
         <li><Link to="admin-new">New</Link></li>
         <li><Link to="admin-payment">Payment</Link></li>
         <li><Link to="admin-profile">Profile</Link></li>
+
+        <li><Link to="admin-categories">Categories</Link></li>
+
       </ul>
     </div>
   );

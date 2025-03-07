@@ -1,7 +1,6 @@
 
 import Banner from '../../components/Banner/Banner'
 import DefaultLayout from '../../components/DefaultLayout/DefaultLayout'
-import Easylist from '../../components/Easylist/Easylist'
 // import Footer from '../../components/Footer/Footer'
 import MaterialDetails from '../../components/MaterialDetails/MaterialDetails'
 import MaterialDetailstwo from '../../components/MaterialDetailstwo/MaterialDetailstwo'
@@ -15,13 +14,14 @@ function Home() {
   return (
     <div>
       <DefaultLayout>
-      <Easylist/>
-      <Banner/>
+      {/* <Banner/> */}
       {/* <TrendingOn/> */}
-      <MaterialDetails/>
+      
+      {/* <MaterialDetails/> */}
       {/* <NewArrival/> */}
       <MaterialDetailstwo/>
       </DefaultLayout>   
+
      </div>
   )
 }

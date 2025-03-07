@@ -7,6 +7,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Models\Product;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\CategoryController;
 
 
 Route::get('/user', function (Request $request) {
@@ -43,4 +44,4 @@ Route::get('/sections/trending', [ProductController::class, 'getTrendingProducts
 
 
 
-Route::post('/orders', [OrderController::class, 'placeOrder']);
+Route::apiresource('categories', CategoryController::class);

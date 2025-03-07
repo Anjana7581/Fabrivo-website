@@ -16,6 +16,7 @@ class ProductController extends Controller
         $products = Product::all()->map(function ($product) {
             if ($product->image) {
                 $product->image_url = asset('storage/' . $product->image); // Add full URL only if image exists
+                unset($product->image); // Remove the relative path from the response
             }
             return $product;
         });
@@ -38,13 +39,12 @@ class ProductController extends Controller
             'type' => 'required|string',
             'description' => 'required|string',
             'rating' => 'nullable|numeric|min:0|max:5',
-           
+            'category_id' => 'required|exists:categories,id',
         ]);
-        
     
         $imagePath = $request->file('image')->store('products', 'public');
     
-        $product = Product::create([
+        Product::create([
             'title' => $request->title,
             'image' => $imagePath,
             'price' => $request->price,
@@ -53,7 +53,7 @@ class ProductController extends Controller
             'type' => $request->type,
             'description' => $request->description,
             'rating' => $request->rating ?? 0,
-
+            'category_id' => $request->category_id,
         ]);
     
         return redirect()->route('products.index')->with('success', 'Product created successfully!');
@@ -68,7 +68,13 @@ class ProductController extends Controller
         // Increment the monthly views each time the product is viewed
         $product->increment('monthly_views');  // Increment the monthly_views column
         $product->save();  // Save the updated value
-
+    
+        // Add the full image URL to the response
+        if ($product->image) {
+            $product->image_url = asset('storage/' . $product->image); // Add full URL only if image exists
+            unset($product->image); // Remove the relative path from the response
+        }
+    
         return response()->json($product, 200);
     }
     /**

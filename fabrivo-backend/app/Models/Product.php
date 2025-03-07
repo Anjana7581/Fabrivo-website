@@ -18,12 +18,16 @@ class Product extends Model
         'color',
         'type',
         'description',
+        'category_id',
         'rating',
         'is_new',
         'is_offer',
         'monthly_views',
     ];
     
-
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 
 }

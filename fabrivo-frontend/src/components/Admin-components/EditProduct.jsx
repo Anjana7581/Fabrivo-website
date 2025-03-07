@@ -34,7 +34,9 @@ function EditProduct() {
         const { name, value } = e.target;
         setProduct({ ...product, [name]: value });
     };
-
+    const handleImageChange = (e) => {
+        setImage(e.target.files[0]);
+      };
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -118,6 +120,18 @@ function EditProduct() {
                         min="0"
                         max="5"
                     />
+                    <div>
+                    <label>Rating</label>
+                    <input
+          type="file"
+          name="image"
+          accept="image/*"
+          onChange={handleImageChange}
+          required
+        />
+                    </div>
+       
+
                 </div>
                 <button className="edit-product-page-button" type="submit">Update Product</button>
             </form>

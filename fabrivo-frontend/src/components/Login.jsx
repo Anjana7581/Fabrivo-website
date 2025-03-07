@@ -28,8 +28,8 @@ const Login = () => {
   };
 
   return (
-    <DefaultLayout>
-    <form onSubmit={handleSubmit}>
+    <DefaultLayout >
+    <form onSubmit={handleSubmit} className='mt-20'>
       <input name="email" type="email" placeholder="Email" onChange={handleChange} />
       <input name="password" type="password" placeholder="Password" onChange={handleChange} />
       <button type="submit">Login</button>
