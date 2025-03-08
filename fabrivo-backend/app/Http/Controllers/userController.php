@@ -65,4 +65,17 @@ class UserController extends Controller
 
         return response()->json(['message' => 'User deleted successfully']);
     }
+    
+    // Fetch authenticated user's profile with orders
+    public function getUserProfile(Request $request)
+    {
+        $user = $request->user();
+        $user->load('orders'); // Assuming you have a relationship defined in your User model
+
+        return response()->json([
+            'name' => $user->name,
+            'email' => $user->email,
+            'orders' => $user->orders,
+        ]);
+    }
 }

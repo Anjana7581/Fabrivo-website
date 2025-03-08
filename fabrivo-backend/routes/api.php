@@ -25,7 +25,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/users/{id}', [UserController::class, 'show']); // Fetch a specific user
     Route::put('/users/{id}', [UserController::class, 'update']); // Update a user
     Route::delete('/users/{id}', [UserController::class, 'destroy']); // Delete a user
+    Route::get('/user-profile', [UserController::class, 'getUserProfile']);
 });
+Route::post('/orders', [OrderController::class, 'placeOrder']);
 
 
 

@@ -23,6 +23,7 @@ import ProductList from './components/ProductList.jsx';
 import Admincategories from './components/Admin-components/admincategories.jsx';
 import Contact from './pages/Contact.jsx';
 import About from './pages/About.jsx';
+import UserProfile from './components/UserProfile.jsx';
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
         <Route path="/productlist" element={<ProductList/>} />
         <Route path="/contact-us" element={<Contact/>} />
         <Route path="/about" element={<About/>} />
+        <Route path="/profile" element={<UserProfile/>} />
 
         {/* Parent route for AdminDashboard */}
         <Route path="/admin-dashboard" element={<AdminDashboard />}>
