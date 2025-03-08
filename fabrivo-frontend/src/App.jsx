@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 import Home from './pages/Home/Home.jsx';
 import Pagenotfound from './pages/Pagenotfound/Pagenotfound.jsx';
-import AllProducts from './pages/AllProducts/AllProducts.jsx';
+// import AllProducts from './pages/AllProducts/AllProducts.jsx';
 import Register from './components/Register';
 import Login from './components/Login';
 import Dashboard from './components/Dashboard';
@@ -21,6 +21,8 @@ import EditProduct from './components/Admin-components/EditProduct.jsx';
 import ProductDetail from './components/ProductDetail.jsx';
 import ProductList from './components/ProductList.jsx';
 import Admincategories from './components/Admin-components/admincategories.jsx';
+import Contact from './pages/Contact.jsx';
+import About from './pages/About.jsx';
 
 function App() {
   return (
@@ -28,7 +30,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/allproducts" element={<AllProducts />} />
+        {/* <Route path="/allproducts" element={<AllProducts />} /> */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />} />
@@ -38,6 +40,8 @@ function App() {
         <Route path="/order-confirmation" element={<OrderConfirmation/>} />
         <Route path="/products/:id" element={<ProductDetail/>} />
         <Route path="/productlist" element={<ProductList/>} />
+        <Route path="/contact-us" element={<Contact/>} />
+        <Route path="/about" element={<About/>} />
 
         {/* Parent route for AdminDashboard */}
         <Route path="/admin-dashboard" element={<AdminDashboard />}>

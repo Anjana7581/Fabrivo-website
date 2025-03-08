@@ -1,12 +1,9 @@
 
-import Banner from '../../components/Banner/Banner'
+import Contact from '../../components/ContactSection'
 import DefaultLayout from '../../components/DefaultLayout/DefaultLayout'
-// import Footer from '../../components/Footer/Footer'
-import MaterialDetails from '../../components/MaterialDetails/MaterialDetails'
-import MaterialDetailstwo from '../../components/MaterialDetailstwo/MaterialDetailstwo'
-// import Navbar from '../../components/Navbar/Navbar'
-import NewArrival from '../../components/NewArrival/NewArrival'
-import TrendingOn from '../../components/TrendingOn/TrendingOn'
+import NewArrivals from '../../components/NewArrivals'
+import NewTrend from '../../components/NewTrend'
+// import OfferZone from '../../components/OfferZone'
 import './Home.css'
 
 function Home() {
@@ -19,7 +16,11 @@ function Home() {
       
       {/* <MaterialDetails/> */}
       {/* <NewArrival/> */}
-      <MaterialDetailstwo/>
+      {/* <MaterialDetailstwo/> */}
+      <NewArrivals/>
+      {/* <OfferZone/> */}
+      <NewTrend/>
+      <Contact/>
       </DefaultLayout>   
 
      </div>

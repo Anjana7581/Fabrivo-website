@@ -30,11 +30,13 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
 
 // Product-related routes
+Route::get('/products/section/{section}', [ProductController::class, 'getSectionProducts']);
+
 Route::apiResource('products', ProductController::class);
 
 // Routes for specific product sections
-Route::get('/sections/{section}', [ProductController::class, 'getSectionProducts']);
-Route::get('/sections/trending', [ProductController::class, 'getTrendingProducts']);
+// Route::get('/sections/{section}', [ProductController::class, 'getSectionProducts']);
+// Route::get('/sections/trending', [ProductController::class, 'getTrendingProducts']);
 
 
 // Route::get('/sections/{section}', [ProductController::class, 'getSectionProducts']);

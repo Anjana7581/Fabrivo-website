@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    /** @use HasFactory<\Database\Factories\ProductFactory> */
     use HasFactory;
 
     protected $fillable = [
@@ -24,10 +23,16 @@ class Product extends Model
         'is_offer',
         'monthly_views',
     ];
+
+    protected $casts = [
+        'is_new' => 'boolean',
+        'is_offer' => 'boolean',
+        'rating' => 'float',
+        'monthly_views' => 'integer',
+    ];
     
     public function category()
     {
         return $this->belongsTo(Category::class);
     }
-
 }

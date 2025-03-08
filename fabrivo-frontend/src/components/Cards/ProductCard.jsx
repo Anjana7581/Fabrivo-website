@@ -1,51 +1,56 @@
-import React from "react";
-import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io"; // Added filled heart icon
+import React, { useState } from "react";
+import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
 import { useCart } from "../../context/cartcontext";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { motion } from "framer-motion";
 
 function ProductCard({ product }) {
   const { addToCart } = useCart();
   const navigate = useNavigate();
-  const [isWishlisted, setIsWishlisted] = useState(false);
+  const [isWishlisted, setIsWishlisted] = useState({});
 
   // Navigate to product details page
   const handleCardClick = (e) => {
-    if (e.target.tagName.toLowerCase() !== "button" && !e.target.closest("button")) {
+    if (!e.target.closest("button")) {
       navigate(`/products/${product.id}`);
     }
   };
 
-  // Handle Add to Cart and Navigate to Cart Page
+  // Handle Add to Cart
   const handleAddToCart = (e) => {
     e.stopPropagation();
     addToCart(product);
-    navigate("/cart"); // Navigate to Cart page after adding to cart
+    navigate("/cart");
   };
 
   // Handle Wishlist Toggle
   const handleWishlist = (e) => {
     e.stopPropagation();
-    setIsWishlisted(!isWishlisted);
-    // Implement Wishlist Functionality (e.g., update state or API)
-    console.log(isWishlisted ? "Removed from Wishlist" : "Added to Wishlist");
+    setIsWishlisted((prev) => ({
+      ...prev,
+      [product.id]: !prev[product.id],
+    }));
   };
 
   return (
-    <div
-      className="bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:scale-105 mt-20 cursor-pointer"
+    <motion.div
+      key={product.id}
+      className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 border border-gray-100"
+      whileHover={{ scale: 1.02 }}
       onClick={handleCardClick}
     >
       {/* Product Image */}
-      <div className="w-full h-64 sm:h-72 md:h-80 overflow-hidden">
+      <div className="w-full h-60 flex items-center justify-center relative">
         {product.image_url ? (
-          <img
+          <motion.img
             src={product.image_url}
             alt={product.title}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-contain p-4"
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.3 }}
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center bg-gray-100 text-gray-500">
+          <div className="w-full h-full flex items-center justify-center text-gray-500">
             No Image
           </div>
         )}
@@ -53,24 +58,27 @@ function ProductCard({ product }) {
 
       {/* Product Details */}
       <div className="p-4">
-        <h3 className="text-lg font-semibold text-gray-800 mb-2 truncate">
+        <h3 className="text-sm font-medium text-gray-800 line-clamp-2 mb-2">
           {product.title}
         </h3>
-        <p className="text-gray-600 mb-2">Price: ${product.price}</p>
+        <p className="text-lg font-bold text-gray-900 mb-3">₹{product.price}</p>
 
-        {/* Buttons */}
+        {/* Cart & Wishlist in One Line */}
         <div className="flex items-center justify-between">
-          <button
+          <motion.button
+            className="py-2.5 px-4 bg-blue-600 text-sm font-medium text-white rounded-md hover:bg-blue-700 transition duration-300"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
             onClick={handleAddToCart}
-            className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-300"
           >
             Add to Cart
-          </button>
+          </motion.button>
+
           <button
             onClick={handleWishlist}
-            className="text-gray-600 hover:text-red-500 transition duration-300"
+            className="text-gray-600 hover:text-red-500 transition w-10 h-10 flex items-center justify-center"
           >
-            {isWishlisted ? (
+            {isWishlisted[product.id] ? (
               <IoMdHeart className="w-6 h-6 text-red-500" />
             ) : (
               <IoMdHeartEmpty className="w-6 h-6" />
@@ -78,7 +86,7 @@ function ProductCard({ product }) {
           </button>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
