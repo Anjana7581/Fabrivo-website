@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
 import { useCart } from "../../context/cartcontext";
+import { useWishlist } from "../../context/WishlistContext"; // Import WishlistContext
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
 function ProductCard({ product }) {
   const { addToCart } = useCart();
+  const { wishlist, addToWishlist, removeFromWishlist } = useWishlist(); // Use WishlistContext
   const navigate = useNavigate();
-  const [isWishlisted, setIsWishlisted] = useState({});
+  const isWishlisted = wishlist.some((item) => item.id === product.id); // Check if product is in wishlist
 
   // Navigate to product details page
   const handleCardClick = (e) => {
@@ -26,10 +28,11 @@ function ProductCard({ product }) {
   // Handle Wishlist Toggle
   const handleWishlist = (e) => {
     e.stopPropagation();
-    setIsWishlisted((prev) => ({
-      ...prev,
-      [product.id]: !prev[product.id],
-    }));
+    if (isWishlisted) {
+      removeFromWishlist(product.id); // Remove from wishlist
+    } else {
+      addToWishlist(product); // Add to wishlist
+    }
   };
 
   return (
@@ -61,7 +64,22 @@ function ProductCard({ product }) {
         <h3 className="text-sm font-medium text-gray-800 line-clamp-2 mb-2">
           {product.title}
         </h3>
-        <p className="text-lg font-bold text-gray-900 mb-3">₹{product.price}</p>
+
+        {/* Price Section */}
+        <div className="flex items-center gap-2 mb-3">
+          {product.offer_price ? (
+            <>
+              <p className="text-lg font-bold text-gray-900">
+                ₹{product.offer_price}
+              </p>
+              <p className="text-sm text-gray-500 line-through">
+                ₹{product.price}
+              </p>
+            </>
+          ) : (
+            <p className="text-lg font-bold text-gray-900">₹{product.price}</p>
+          )}
+        </div>
 
         {/* Cart & Wishlist in One Line */}
         <div className="flex items-center justify-between">
@@ -78,7 +96,7 @@ function ProductCard({ product }) {
             onClick={handleWishlist}
             className="text-gray-600 hover:text-red-500 transition w-10 h-10 flex items-center justify-center"
           >
-            {isWishlisted[product.id] ? (
+            {isWishlisted ? (
               <IoMdHeart className="w-6 h-6 text-red-500" />
             ) : (
               <IoMdHeartEmpty className="w-6 h-6" />

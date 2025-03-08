@@ -24,7 +24,7 @@ const NewTrend = () => {
   }, []);
 
   return (
-    <div className="p-4 md:p-8 bg-gray-50 mt-20">
+    <div className="p-4 md:p-8 bg-gray-50 ">
       {/* Section Title */}
       <motion.h2
         className="text-2xl font-bold text-center mb-8 text-gray-900 flex items-center justify-center gap-2"

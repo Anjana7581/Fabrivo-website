@@ -71,7 +71,7 @@ const Contact = () => {
             {[ 
               { title: "📍 Our Office", text: "123 Visa Street, New York, USA" },
               { title: "📞 Call Us", text: "+1 234 567 890" },
-              { title: "📧 Email Us", text: "support@visaconsultancy.com" },
+              { title: "📧 Email Us", text: "support@abc.com" },
             ].map((item, index) => (
               <motion.div
                 key={index}

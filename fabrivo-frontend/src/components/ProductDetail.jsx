@@ -13,6 +13,7 @@ function ProductDetail() {
   const [product, setProduct] = useState({
     title: "",
     price: 0,
+    offer_price: null, // Add offer_price to the initial state
     description: "",
     image_url: "",
     rating: 0,
@@ -105,7 +106,23 @@ function ProductDetail() {
               <div className="flex">{renderRating(product.rating)}</div>
               <span className="text-gray-500">({product.reviews} reviews)</span>
             </div>
-            <p className="text-2xl font-bold text-gray-800">${product.price}</p>
+
+            {/* Price Section */}
+            <div className="flex items-center space-x-2">
+              {product.offer_price ? (
+                <>
+                  <p className="text-2xl font-bold text-gray-800">
+                    ${product.offer_price}
+                  </p>
+                  <p className="text-xl text-gray-500 line-through">
+                    ${product.price}
+                  </p>
+                </>
+              ) : (
+                <p className="text-2xl font-bold text-gray-800">${product.price}</p>
+              )}
+            </div>
+
             <p className="text-gray-600">{product.description}</p>
 
             {/* Buttons */}

@@ -20,13 +20,16 @@ import OrderConfirmation from './components/orderconfirmation.jsx';
 import EditProduct from './components/Admin-components/EditProduct.jsx';
 import ProductDetail from './components/ProductDetail.jsx';
 import ProductList from './components/ProductList.jsx';
-import Admincategories from './components/Admin-components/admincategories.jsx';
+import Admincategories from './components/Admin-components/Admincategories.jsx';
 import Contact from './pages/Contact.jsx';
 import About from './pages/About.jsx';
 import UserProfile from './components/UserProfile.jsx';
+import Adminorder from './components/Admin-components/Adminorder.jsx';
+import { WishlistProvider } from './context/WishlistContext.jsx';
 
 function App() {
   return (
+    <WishlistProvider>
     < CartProvider >
     <Router>
       <Routes>
@@ -55,6 +58,7 @@ function App() {
           <Route path="admin-profile" element={<Adminprofile />} />
           <Route path="admin-product/edit/:id" element={<EditProduct />} />
           <Route path="admin-categories" element={<Admincategories/>} />
+          <Route path="admin-order" element={<Adminorder/>} />
 
         </Route>
       </Routes>
@@ -62,6 +66,7 @@ function App() {
 
     </Router>
     </CartProvider>
+    </WishlistProvider>
   );
 }
 

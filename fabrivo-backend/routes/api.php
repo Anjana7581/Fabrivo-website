@@ -27,22 +27,15 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::delete('/users/{id}', [UserController::class, 'destroy']); // Delete a user
     Route::get('/user-profile', [UserController::class, 'getUserProfile']);
 });
-Route::post('/orders', [OrderController::class, 'placeOrder']);
-
-
+Route::post('/orders', [OrderController::class, 'placeOrder']); // Create order
+Route::get('/orders', [OrderController::class, 'getAllOrders']); // Fetch all orders
+Route::put('/orders/{order}/status', [OrderController::class, 'updateStatus']); // Update order status
 
 // Product-related routes
 Route::get('/products/section/{section}', [ProductController::class, 'getSectionProducts']);
 
 Route::apiResource('products', ProductController::class);
 
-// Routes for specific product sections
-// Route::get('/sections/{section}', [ProductController::class, 'getSectionProducts']);
-// Route::get('/sections/trending', [ProductController::class, 'getTrendingProducts']);
-
-
-// Route::get('/sections/{section}', [ProductController::class, 'getSectionProducts']);
-// Route::get('/sections/trending', [ProductController::class, 'getTrendingProducts']);
 
 
 

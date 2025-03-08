@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import axiosInstance from '../axiosInstance'; // Import your axiosInstance
+import { useWishlist } from '../context/WishlistContext'; // Import WishlistContext
 import DefaultLayout from "./DefaultLayout/DefaultLayout";
 
 const UserProfile = () => {
   const [userProfile, setUserProfile] = useState({}); // Initialize as an empty object
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const { wishlist, removeFromWishlist } = useWishlist(); // Access wishlist and remove function from context
 
-  // Fetch user profile and orders
+  // Fetch user profile, orders, and wishlist
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
@@ -23,6 +25,16 @@ const UserProfile = () => {
 
     fetchUserProfile();
   }, []);
+
+  // Handle removing an item from the wishlist
+  const handleRemoveFromWishlist = async (productId) => {
+    try {
+      await axiosInstance.delete(`/wishlist/${productId}`); // Remove from backend
+      removeFromWishlist(productId); // Remove from context
+    } catch (error) {
+      console.error('Error removing item from wishlist:', error);
+    }
+  };
 
   // Display loading spinner while fetching data
   if (loading) {
@@ -48,7 +60,7 @@ const UserProfile = () => {
 
   return (
     <DefaultLayout>
-      <div className="container mx-auto p-6">
+      <div className="container mx-auto p-6 mt-20">
         {/* Profile Header */}
         <div className="bg-white shadow-sm rounded-lg p-6 mb-8">
           <h1 className="text-2xl font-bold text-gray-800 mb-4">Your Profile</h1>
@@ -62,6 +74,38 @@ const UserProfile = () => {
               <span className="text-gray-800">{userProfile.email || 'N/A'}</span>
             </div>
           </div>
+        </div>
+
+        {/* Wishlist Section */}
+        <div className="bg-white shadow-sm rounded-lg p-6 mb-8">
+          <h2 className="text-2xl font-bold text-gray-800 mb-6">Your Wishlist</h2>
+          {wishlist.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+              {wishlist.map((product) => (
+                <div key={product.id} className="border rounded-lg p-4 hover:shadow-md transition-shadow">
+                  <img
+                    src={product.image_url || 'https://via.placeholder.com/150'}
+                    alt={product.title}
+                    className="w-full h-40 object-contain mb-4"
+                  />
+                  <h3 className="text-lg font-semibold line-clamp-2">{product.title}</h3>
+                  <div className="flex items-center justify-between mt-2">
+                    <p className="text-gray-800 font-bold">
+                      ₹{product.offer_price || product.price}
+                    </p>
+                    <button
+                      onClick={() => handleRemoveFromWishlist(product.id)}
+                      className="text-red-500 hover:text-red-700 transition"
+                    >
+                      Remove
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="text-gray-600">Your wishlist is empty.</p>
+          )}
         </div>
 
         {/* Orders Section */}

@@ -43,4 +43,19 @@ class OrderController extends Controller
 
         return response()->json(['message' => 'Order placed successfully!', 'order' => $order]);
     }
+    public function getAllOrders() {
+        $orders = Order::with(['user', 'orderItems'])->get(); // Ensure 'orderItems' exists in Order model
+        return response()->json($orders);
+    }
+    
+public function updateStatus(Request $request, Order $order)
+{
+    $validated = $request->validate([
+        'status' => 'required|string|in:pending,processing,shipped,delivered,cancelled',
+    ]);
+
+    $order->update(['status' => $validated['status']]);
+
+    return response()->json(['message' => 'Order status updated successfully!', 'order' => $order]);
+}
 }

@@ -79,27 +79,18 @@ const ProductList = () => {
 
           {/* Category Filter */}
           <h3 className="font-semibold mb-2">Category</h3>
-          <div className="space-y-2">
-            <button
-              onClick={() => setSelectedCategory(null)}
-              className={`w-full text-left px-4 py-2 rounded-md ${
-                !selectedCategory ? "bg-blue-500 text-white" : "bg-gray-200"
-              }`}
-            >
-              All
-            </button>
+          <select
+            value={selectedCategory || ""}
+            onChange={(e) => setSelectedCategory(e.target.value || null)}
+            className="w-full p-2 mb-4 border rounded-md"
+          >
+            <option value="">All</option>
             {categories.map((category) => (
-              <button
-                key={category.id}
-                onClick={() => setSelectedCategory(category.id)}
-                className={`w-full text-left px-4 py-2 rounded-md ${
-                  selectedCategory === category.id ? "bg-blue-500 text-white" : "bg-gray-200"
-                }`}
-              >
+              <option key={category.id} value={category.id}>
                 {category.name}
-              </button>
+              </option>
             ))}
-          </div>
+          </select>
 
           {/* Price Range */}
           <h3 className="font-semibold mt-4 mb-2">Price Range</h3>
