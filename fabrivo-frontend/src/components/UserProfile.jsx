@@ -25,7 +25,16 @@ const UserProfile = () => {
 
     fetchUserProfile();
   }, []);
-
+  // Handle user logout
+  const handleLogout = async () => {
+    try {
+      await axiosInstance.post('/logout'); // Call logout API
+      localStorage.removeItem('authToken'); // Remove auth token
+      navigate('/login'); // Redirect to login page
+    } catch (error) {
+      console.error('Error logging out:', error);
+    }
+  };
   // Handle removing an item from the wishlist
   const handleRemoveFromWishlist = async (productId) => {
     try {
@@ -74,6 +83,12 @@ const UserProfile = () => {
               <span className="text-gray-800">{userProfile.email || 'N/A'}</span>
             </div>
           </div>
+          <button 
+            onClick={handleLogout} 
+            className="mt-4 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition"
+          >
+            Logout
+          </button>
         </div>
 
         {/* Wishlist Section */}

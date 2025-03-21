@@ -10,7 +10,7 @@ export default defineConfig({
   test: {
     globals: true, // Enable global variables like `describe`, `test`, etc.
     environment: 'jsdom', // Use JSDOM for browser-like environment
-    setupFiles: './src/setupTests.js', // Path to setup file
+    setupFiles: "./src/setupTests.js", // Correct path
   },
 
 
