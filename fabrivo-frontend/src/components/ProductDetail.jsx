@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axiosInstance from "../axiosInstance";
+import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
+
 import { useCart } from "../context/cartcontext";
-import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 import DefaultLayout from "./DefaultLayout/DefaultLayout";
 
