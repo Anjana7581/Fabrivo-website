@@ -24,10 +24,10 @@ function Footer() {
           <div className="space-y-4">
             <h4 className="text-lg font-semibold">SHOP</h4>
             <ul className="space-y-2">
-              <li><a href="#" className="text-white hover:text-gray-200 transition">Products</a></li>
-              <li><a href="#" className="text-white hover:text-gray-200 transition">Overview</a></li>
-              <li><a href="#" className="text-white hover:text-gray-200 transition">Pricing</a></li>
-              <li><a href="#" className="text-white hover:text-gray-200 transition">Releases</a></li>
+              <li><a href="/productlist" className="text-white hover:text-gray-200 transition">Products</a></li>
+              <li><a href="/productlist" className="text-white hover:text-gray-200 transition">Overview</a></li>
+              <li><a href="/productlist" className="text-white hover:text-gray-200 transition">Pricing</a></li>
+              <li><a href="/productlist" className="text-white hover:text-gray-200 transition">Releases</a></li>
             </ul>
           </div>
   
@@ -35,10 +35,10 @@ function Footer() {
           <div className="space-y-4">
             <h4 className="text-lg font-semibold">COMPANY</h4>
             <ul className="space-y-2">
-              <li><a href="#" className="text-white hover:text-gray-200 transition">About Us</a></li>
-              <li><a href="#" className="text-white hover:text-gray-200 transition">Contact</a></li>
-              <li><a href="#" className="text-white hover:text-gray-200 transition">News</a></li>
-              <li><a href="#" className="text-white hover:text-gray-200 transition">Support</a></li>
+              <li><a href="/about" className="text-white hover:text-gray-200 transition">About Us</a></li>
+              <li><a href="/contact-us" className="text-white hover:text-gray-200 transition">Contact</a></li>
+              <li><a href="/productlist" className="text-white hover:text-gray-200 transition">Shop</a></li>
+              {/* <li><a href="/" className="text-white hover:text-gray-200 transition">Support</a></li> */}
             </ul>
           </div>
   
@@ -62,13 +62,13 @@ function Footer() {
         </div>
   
         {/* Footer Bottom */}
-        <div className="border-t border-blue-500 mt-8 pt-6">
+        {/* <div className="border-t border-blue-500 mt-8 pt-6">
           <div className="container mx-auto px-6 flex justify-center space-x-6 text-white">
-            <a href="#" className="hover:text-gray-200 transition">Terms</a>
-            <a href="#" className="hover:text-gray-200 transition">Privacy</a>
-            <a href="#" className="hover:text-gray-200 transition">Cookies</a>
+            <a href="" className="hover:text-gray-200 transition">Terms</a>
+            <a href="" className="hover:text-gray-200 transition">Privacy</a>
+            <a href="" className="hover:text-gray-200 transition">Cookies</a>
           </div>
-        </div>
+        </div> */}
       </div>
     );
   }
