@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import axiosInstance from '../axiosInstance'; // Import your axiosInstance
 import { useWishlist } from '../context/WishlistContext'; // Import WishlistContext
 import DefaultLayout from "./DefaultLayout/DefaultLayout";
+import { useNavigate } from 'react-router-dom'; // Import useNavigate for redirection
 
 const UserProfile = () => {
   const [userProfile, setUserProfile] = useState({}); // Initialize as an empty object
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { wishlist, removeFromWishlist } = useWishlist(); // Access wishlist and remove function from context
+  const navigate = useNavigate(); // Initialize navigation
 
   // Fetch user profile, orders, and wishlist
   useEffect(() => {
@@ -25,16 +27,7 @@ const UserProfile = () => {
 
     fetchUserProfile();
   }, []);
-  // Handle user logout
-  const handleLogout = async () => {
-    try {
-      await axiosInstance.post('/logout'); // Call logout API
-      localStorage.removeItem('authToken'); // Remove auth token
-      navigate('/login'); // Redirect to login page
-    } catch (error) {
-      console.error('Error logging out:', error);
-    }
-  };
+
   // Handle removing an item from the wishlist
   const handleRemoveFromWishlist = async (productId) => {
     try {
@@ -66,7 +59,16 @@ const UserProfile = () => {
       </DefaultLayout>
     );
   }
-
+  // Handle user logout
+  const handleLogout = async () => {
+    try {
+      await axiosInstance.post('/logout'); // Call logout API
+      localStorage.removeItem('authToken'); // Remove auth token
+      navigate('/login'); // Redirect to login page
+    } catch (error) {
+      console.error('Error logging out:', error);
+    }
+  };
   return (
     <DefaultLayout>
       <div className="container mx-auto p-6 mt-20">

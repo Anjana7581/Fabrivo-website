@@ -69,7 +69,7 @@ const Contact = () => {
             {[ 
               { title: "📍 Office Address", text: "123 Visa Street, New York, USA" },
               { title: "📞 Phone", text: "+1 234 567 890" },
-              { title: "📧 Email", text: "support@visaconsultancy.com" },
+              { title: "📧 Email", text: "support@fabrivo.com" },
             ].map((item, index) => (
               <div key={index} className="border p-5 rounded-lg shadow-sm bg-white hover:shadow-md transition">
                 <h3 className="text-lg font-semibold text-gray-800">{item.title}</h3>

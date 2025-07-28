@@ -1,8 +1,11 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { FaTag } from "react-icons/fa"; // Example icon
+import { useNavigate } from 'react-router-dom'; // Import useNavigate for redirection
 
 const Banner = () => {
+    const navigate = useNavigate(); // Initialize navigation
+  
   return (
     <div className="relative h-[300px] flex items-center justify-center bg-gray-100">
       {/* Content */}
@@ -54,12 +57,16 @@ const Banner = () => {
           transition={{ duration: 0.8, delay: 0.8 }}
           className="flex justify-center gap-4"
         >
-          <button className="bg-blue-600 text-white px-6 py-2 rounded-lg text-sm md:text-base font-semibold hover:bg-blue-700 transition transform hover:scale-105">
-            Shop Now
-          </button>
-          <button className="bg-transparent border border-blue-600 text-blue-600 px-6 py-2 rounded-lg text-sm md:text-base font-semibold hover:bg-blue-600 hover:text-white transition">
+<button 
+  onClick={() => navigate('/productlist')} // Navigate to the product list page
+  className="bg-blue-600 text-white px-6 py-2 rounded-lg text-sm md:text-base font-semibold hover:bg-blue-700 transition transform hover:scale-105"
+>
+  Shop Now
+</button>
+
+          {/* <button className="bg-transparent border border-blue-600 text-blue-600 px-6 py-2 rounded-lg text-sm md:text-base font-semibold hover:bg-blue-600 hover:text-white transition">
             Learn More
-          </button>
+          </button> */}
         </motion.div>
       </div>
     </div>

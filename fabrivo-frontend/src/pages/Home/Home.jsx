@@ -23,7 +23,7 @@ function Home() {
       {/* <MaterialDetailstwo/> */}
       <NewArrivals/>
       {/* <OfferZone/> */}
-<Banner/>
+      <Banner/>
       <NewTrend/>
       <Stats/>
 
